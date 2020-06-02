@@ -23,6 +23,35 @@ namespace Vezba31.PageObjects
             this.driver.Navigate().GoToUrl("http://test.qa.rs/");
         }
 
+        public IWebElement RegistrujKorisnika
+        {
+            get
+            {
+                IWebElement element;
+                try
+                {
+                    wait.Until(EC.ElementIsVisible(By.XPath("//a[@href='/new']")));
+                    element = this.driver.FindElement(By.XPath("//a[@href='/new']"));
+                }
+                catch (Exception)
+                {
+                    element = null;
+                }
+
+                return element;
+            }
+        }
+
+        public RegistrationPage ClickOnRegistrujKorisnika()
+        {
+            this.RegistrujKorisnika?.Click();
+            wait.Until(EC.ElementIsVisible(By.Name("ime")));
+            return new RegistrationPage(driver);
+
+        }
+
+
+
         public IWebElement ListaKorisnika
         {
             get
